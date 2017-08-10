@@ -1,26 +1,25 @@
-# Slim Framework 3 Skeleton Application
+# SMS API using twilio
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3 with the PHP-View template renderer. It also uses the Monolog logger.
+## Install
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+```
+composer install
+```
 
-## Install the Application
+## Start App
 
-Run this command from the directory in which you want to install your new Slim Framework application.
+```php -S localhost:8080 -t public public/index.php```
 
-    php composer.phar create-project slim/slim-skeleton [my-app-name]
+Should be available at http://localhost:8080/
 
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
+# Send SMS
 
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writeable.
+ Send POST requests to  http://localhost:8080/send-sms with body as follows
 
-To run the application in development, you can also run this command. 
-
-	php composer.phar start
-
-Run this command to run the test suite
-
-	php composer.phar test
-
-That's it! Now go build something cool.
+```
+{
+    "phone": "+9233495XXXXX",
+    "message":"Baz aaja, ainda message na karna Imran Khan",
+    "client": "9765487"
+}
+```
