@@ -7,7 +7,7 @@ use Twilio\Rest\Client;
 
 $app->get('/[{name}]', function ($request, $response, $args) {
     // Sample log message
-    $this->logger->info("Main/ HName route generic '/' route");
+    $this->logger->info("Main/ Home route generic '/' route");
 
     // Render index view
     return $this->renderer->render($response, 'index.phtml', $args);
@@ -24,11 +24,11 @@ $app->post('/send-sms', function ($request, $response, $args) {
     $message = $data->message;
     $clientID = $data->client;
 
-    // check if client
+    // check if client is valid
 
     if (clientValid($clientID)) {
-        $response = sendSMS($phoneNumber, $message);
-        if (response['success']) {
+        $result = sendSMS($phoneNumber, $message);
+        if ($result['success']) {
             $data = array('success' => 'true', 'msg' => 'Message sent.');
             return $response->withJson($data, 201);
         }
@@ -61,6 +61,7 @@ function clientValid($ID)
 
 function twilioSend($phoneNumber, $message)
 {
+    return false; //TO-DO remove later
     require __DIR__ . '/../config/index.php'; // Loads the config
 
     $client = new Client($sid, $token);
