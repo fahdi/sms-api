@@ -61,7 +61,7 @@ function clientValid($ID)
 
 function twilioSend($phoneNumber, $message)
 {
-    return false; //TO-DO remove later
+    
     require __DIR__ . '/../config/index.php'; // Loads the config
 
     $client = new Client($sid, $token);
