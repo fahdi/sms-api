@@ -74,7 +74,7 @@ function twilioSend($phoneNumber, $message)
         $phoneNumber,
         array(
             // A Twilio phone number you purchased at twilio.com/console
-            'from' => '+14159388710',
+            'from' => $mainPhoneNumber,
             // the body of the text message you'd like to send
             'body' => $message
         )
