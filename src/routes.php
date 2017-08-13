@@ -28,15 +28,11 @@ $app->post('/send-sms', function ($request, $response, $args) {
 
     if (clientValid($clientID)) {
         $result = sendSMS($phoneNumber, $message);
-        if ($result['success']) {
-            $data = array('success' => 'true', 'msg' => 'Message sent.');
-            return $response->withJson($data, 201);
-        }
-
+        return $response->withJson( $result , 201);
         // respond with remaining count, success, and msg
     }
 
-    $data = array('success' => 'false', 'msg' => 'Message wasn\'t sent. ');
+    $data = array('success' => false, 'msg' => 'Message wasn\'t sent. ');
     return $response->withJson($data, 404);
 });
 
@@ -46,9 +42,9 @@ function sendSMS($phoneNumber, $message)
         $sent = 10;
         $remainingMessageCount = 1000 - $sent;
         $status = true;
-        return ['remainingMessageCount' => $remainingMessageCount, 'success' => $status];
+        return array('remainingMessageCount' => $remainingMessageCount, 'success' => $status, 'msg' => 'Message sent.');
     }
-    return ['remainingMessageCount' => 'NULL', 'success' => false];
+    return array('remainingMessageCount' => NULL, 'success' => false, 'msg' => 'Message wasn\'t sent.');
 }
 
 function clientValid($ID)
@@ -61,16 +57,16 @@ function clientValid($ID)
 
 function twilioSend($phoneNumber, $message)
 {
-    
+
     require __DIR__ . '/../config/index.php'; // Loads the config
 
     $client = new Client($sid, $token);
 
     $client->messages->create(
     // the number you'd like to send the message to
-        //'+923349529394', // Fahad
-        //'+923429855439', // Tahir
-        //'+923135809761', // Taufeeq
+    //'+923349529394', // Fahad
+    //'+923429855439', // Tahir
+    //'+923135809761', // Taufeeq
         $phoneNumber,
         array(
             // A Twilio phone number you purchased at twilio.com/console
