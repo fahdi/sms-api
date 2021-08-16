@@ -19,7 +19,7 @@ Should be available at http://localhost:8080/
 ```
 {
     "phone": "+9233495XXXXX",
-    "message":"Baz aaja, ainda message na karna Imran Khan",
+    "message":"Example SMS text!",
     "client": "9765487"
 }
 ```
